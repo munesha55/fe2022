@@ -1,4 +1,4 @@
-[![Run on Repl.it](https://repl.it/badge/github/snickdx/fe2022)](https://repl.it/github/snickdx/fe2021)
+[![Run on Repl.it](https://repl.it/badge/github/snickdx/fe2022)](https://repl.it/github/snickdx/fe2022)
 
 # Flask Starter Template fo REPLit
 A template for simple flask projects. For production projects with testing and deployment it is recommended to use [flaskmvc](https://gitpod.io/#https://github.com/uwidcit/flaskmvc).
