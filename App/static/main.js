@@ -5,9 +5,9 @@ async function load_books(){
 	let html = "";
 	for (let book of results){
 		html += `
-		<div class="book">
+		<div class="book card">
 			<div>${book.title}</div>
-			<img src="${book.url_l}" />
+			<img src="${book.url_l}"/>
 			<span>${book.author}</span>
 			<span>${book.publication_year}</span>
 			<span>${book.publisher}</span>
