@@ -2,7 +2,7 @@ import os
 from flask import Flask, redirect, render_template, jsonify, request, send_from_directory, flash
 from flask_cors import CORS
 from sqlalchemy.exc import OperationalError
-from App.models import db, get_migrate, create_db
+from App.models import db, get_migrate, create_db, Book, Review
 
 def create_app():
     app = Flask(__name__, static_url_path='/static')
@@ -24,13 +24,12 @@ migrate = get_migrate(app)
 
 @app.route('/', methods=['GET'])
 def home():
-  return render_template('index.html')
-
-
-@app.route('/static/home', methods=['GET'])
-def home2():
   return send_from_directory('static', 'index.html')
 
+@app.route('/books', methods=['GET'])
+def get_books():
+	books = Book.query.all()
+	return jsonify([book.toDict() for book in books])
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=8080, debug=True)

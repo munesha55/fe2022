@@ -30,6 +30,18 @@ class Book(db.Model):
 	url_m = db.Column('url_m', db.String(100), nullable=True)
 	url_l = db.Column('url_l', db.String(100), nullable=True)
 
+	def toDict(self):
+		return {
+			'isbn': self.isbn,
+			'title': self.title,
+			'author': self.author,
+			'publication_year': self.publication_year,
+			'publisher': self.publisher,
+			'url_s': self.url_s,
+			'url_m': self.url_m,
+			'url_l': self.url_l
+		}
+
 	def get_avg_rating(self):
 		sum = 0
 		for review in self.reviews:

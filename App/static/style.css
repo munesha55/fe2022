@@ -1,0 +1,24 @@
+*{
+	box-sizing: border-box;
+}
+
+#content{
+	display: flex;
+}
+
+#books{
+	display: flex;
+	flex-direction: row;
+	flex-grow: 7;
+	flex-wrap: wrap;
+}
+
+#reviews{
+	flex-grow: 3;
+}
+
+.book{
+	display: flex;
+	flex-direction: column;
+	flex-basis: 25%;
+}
