@@ -31,35 +31,39 @@
 			<div id="reviews">
 				<div class="card">
 					<span id="form-title">Select a Book to Review</span>
-					<form action="#" onclick="submit()">
+					<form action="#" id="reviewForm" onsubmit="addReview();">
 						<label
-							Write a Review Form
-							<textarea name="text" id="" cols="30" rows="10"></textarea>
+							<span>Write a Review Form</span>
+							<textarea name="text" style="height: 4em; width: 100%;"></textarea>
 						</label>
 						<span>Rating</span>
 						<div>
 							<label>
-								<input type="radio" name="rating" value="1">
-								1 star
+								<input type="radio" name="rating" value="1" class="with-gap">
+								<span>1 star</span>
 							</label>
 							<label>
-								<input type="radio" name="rating" value="2">
-								2 star
+								<input type="radio" name="rating" value="2" class="with-gap">
+								<span>2 star</span>
 							</label>
 							<label>
-								<input type="radio" name="rating" value="3">
-								3 star
+								<input type="radio" name="rating" value="3" class="with-gap">
+								<span>3 star</span>
 							</label>
 							<label>
-								<input type="radio" name="rating" value="4">
-								4 star
+								<input type="radio" name="rating" value="4" class="with-gap">
+								<span>4 star</span>
 							</label>
 							<label>
-								<input type="radio" name="rating" value="5">
-								5 star
+								<input type="radio" name="rating" value="5" class="with-gap">
+								<span>5 star</span>
 							</label>
 						</div>
+						<button type="button" onclick="addReview();">Create Review</button>
 					</form>
+				</div>
+				<div id="reviewList">
+					
 				</div>
 			</div>
 		</div>

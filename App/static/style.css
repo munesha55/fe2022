@@ -2,6 +2,10 @@
 	box-sizing: border-box;
 }
 
+body{
+	overflow: hidden;
+}
+
 #content{
 	display: flex;
 	padding: 0.5em;
@@ -14,6 +18,8 @@
 	flex-grow: 7;
 	flex-wrap: wrap;
 	margin: 0 0.5em;
+	height: 88vh;
+	overflow-y: scroll;
 }
 
 #reviews{
@@ -24,9 +30,29 @@
 	margin: 0 0.5em;
 }
 
+#reviews .card{
+	padding: 0.5em;
+}
+
 #reviews form{
 	display: flex;
 	flex-direction: column;
+}
+
+#reviews button{
+	display: flex;
+	margin: 1em;
+	margin-left: auto;
+}
+
+#reviewList{
+	height: 53vh;
+	overflow-y: auto;
+}
+
+#reviewList .card{
+	padding: 0.5em;
+	margin: 0.5em;
 }
 
 .book{
