@@ -54,4 +54,6 @@ class Book(db.Model):
 		sum = 0
 		for review in self.reviews:
 			sum += review.rating
-		return sum / len(self.reviews)
+		if len(self.reviews) > 0:
+			return sum / len(self.reviews)
+		return 0

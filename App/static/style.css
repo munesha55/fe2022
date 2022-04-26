@@ -77,3 +77,7 @@ body{
 	height: 8em;
 	width: 6.5em;
 }
+
+.checked{
+	color: limegreen;
+}

@@ -31,6 +31,14 @@ def get_books():
 	books = Book.query.all()
 	return jsonify([book.toDict() for book in books])
 
+@app.route('/average/<isbn>', methods=['GET'])
+def get_average(isbn):
+	book = Book.query.filter_by(isbn=isbn).first()
+	average = book.get_avg_rating()
+	average = 4
+	print(average)
+	return jsonify({'average': average})
+
 @app.route('/reviews/<isbn>', methods=['GET'])
 def get_reviews(isbn):
 	reviews = Review.query.filter_by(isbn=isbn).all()
