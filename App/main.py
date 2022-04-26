@@ -31,5 +31,10 @@ def get_books():
 	books = Book.query.all()
 	return jsonify([book.toDict() for book in books])
 
+@app.route('/reviews/<isbn>', methods=['GET'])
+def get_reviews(isbn):
+	reviews = Review.query.filter_by(isbn=isbn).all()
+	return jsonify([review.toDict() for review in reviews])
+
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=8080, debug=True)

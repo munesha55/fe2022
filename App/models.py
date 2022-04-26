@@ -19,6 +19,14 @@ class Review(db.Model):
 	rating = db.Column('rating', db.Integer, nullable=False)
 	isbn = db.Column('isbn', db.ForeignKey('book.isbn'))
 
+	def toDict(self):
+		return {
+			'id': self.id,
+			'text': self.text,
+			'rating': self.rating,
+			'isbn': self.isbn
+		}
+
 class Book(db.Model):
 	isbn = db.Column('isbn', db.String(100), primary_key=True, nullable=False)
 	title = db.Column('title', db.String(100), nullable=False)

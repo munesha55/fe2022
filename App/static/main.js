@@ -41,13 +41,13 @@ async function get_reviews(formData){
 
 const reviews = document.getElementById("reviewList");
 function addReview(e){	
-	let formData = new FormData(document.getElementById("reviewForm"));
-	// let results = get_reviews(formData);
-	let html = `<h1>${formData.get('rating')}</h1>`;
+	let formData = document.forms[0];
+	let results = get_reviews(formData);
+	let html = ``;
 	// for (let review of results){
 		
 	// }
 	reviews.innerHTML = html;
-	document.forms[0].reset();
+	formData.reset();
 	e.preventDefault();
 }
