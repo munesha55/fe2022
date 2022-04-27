@@ -6,8 +6,10 @@ async function get_averages(){
 }
 
 const formTitle = document.getElementById("formTitle");
+const crbutton = document.getElementById("createReviewButton");
 function change_title(title, isbn){
-	reviews.innerHTML = `<span>${title} - ${isbn}</span>`;
+	formTitle.innerHTML = `<span>${title} - ${isbn}</span>`;
+	crbutton.removeAttribute('disabled');
 }
 	
 const books = document.getElementById("books");
@@ -41,7 +43,7 @@ async function load_books(){
 		}
 		html += `
 			</div>
-			<button type="button" onclick="change_title(${book.title}, ${book.isbn});">Review</button>
+			<button type="button" onclick="change_title('${book.title}','${book.isbn}')">Review</button>
 		</div>
 		`;
 		count += 1;
@@ -53,56 +55,53 @@ document.addEventListener("DOMContentLoaded", ()=>{
 	load_books();
 });
 
+async function load_reviews(isbn){
+	let response = await fetch(`/reviews/${isbn}`);
+	let results = await response.json();
+	let html = "";
+	for (let review of results){
+		html += `
+		<div class="review card">
+			<span>${review.text}</span>
+			<div>
+				<span>Rating</span>
+		`;
+		for (let i = 0; i < 5; i++){
+			if (i < review.rating){
+				html += `
+					<span class="material-icons checked">star_rate</span>
+				`;
+			}
+			else {
+				html += `
+					<span class="material-icons">star_rate</span>
+				`;
+			}
+		}
+		html += `
+			</div>
+			<button type="button" onclick="delete_review(${review.id});">delete</button>
+		</div>
+		`;
+	}
+	reviews.innerHTML = html;
+}
 
+async function add_review(formData){
+	let response = await fetch(`/createReview/${formData}`);
+	let results = await response.json();
+	load_reviews(results['isbn']);
+}
 
+async function delete_review(id){
+	let response = await fetch(`/deleteReview/${id}`);
+	let results = await response.json();
+	load_reviews(results['isbn']);
+}
 
-// async function load_reviews(isbn){
-// 	let response = await fetch(`/reviews/${isbn}`);
-// 	let results = await response.json();
-// 	let html = "";
-// 	for (let review of results){
-// 		html += `
-// 		<div class="review card">
-// 			<span>${review.text}</span>
-// 			<div>
-// 				<span>Rating</span>
-// 		`;
-// 		for (let i = 0; i < 5; i++){
-// 			if (i < review.rating){
-// 				html += `
-// 					<span class="material-icons checked">star_rate</span>
-// 				`;
-// 			}
-// 			else {
-// 				html += `
-// 					<span class="material-icons">star_rate</span>
-// 				`;
-// 			}
-// 		}
-// 		html += `
-// 			</div>
-// 			<button type="button" onclick="delete_review(${review.id});">delete</button>
-// 		</div>
-// 		`;
-// 	}
-// 	reviews.innerHTML = html;
-// }
-
-// async function add_review(formData){
-// 	let response = await fetch(`/createReview/${formData}`);
-// 	let results = await response.json();
-// 	load_reviews(results['isbn']);
-// }
-
-// async function delete_review(id){
-// 	let response = await fetch(`/deleteReview/${id}`);
-// 	let results = await response.json();
-// 	load_reviews(results['isbn']);
-// }
-
-// function addReview(e){	
-// 	let formData = document.forms[0];
-// 	add_review(formData);
-// 	formData.reset();
-// 	e.preventDefault();
-// }
+function addReview(e){	
+	let formData = document.forms[0];
+	add_review(formData);
+	formData.reset();
+	e.preventDefault();
+}
