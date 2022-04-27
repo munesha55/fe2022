@@ -6,6 +6,10 @@ body{
 	overflow: hidden;
 }
 
+body>nav{
+	background-color: limegreen;
+}
+
 #content{
 	display: flex;
 	padding: 0.5em;
@@ -20,6 +24,11 @@ body{
 	margin: 0 0.5em;
 	height: 88vh;
 	overflow-y: scroll;
+}
+
+#books .card{
+	margin-left: 0.25em;
+	margin-right: 0.25em;
 }
 
 #reviews{
@@ -62,11 +71,15 @@ body{
 .book{
 	display: flex;
 	flex-direction: column;
-	flex-basis: 25%;
+	flex-basis: 24%;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	height: 55vh;
+	height: 65vh;
+}
+
+.book>*{
+	margin: 0.25em auto;
 }
 
 .book div:first-child{
@@ -83,5 +96,5 @@ body{
 }
 
 .checked{
-	color: limegreen;
+	color: greenyellow;
 }
