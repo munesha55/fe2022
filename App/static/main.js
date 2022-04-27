@@ -1,15 +1,22 @@
-async function get_average(isbn){
-	let response = await fetch(`/average/${isbn}`);
-	let result = response.json();
-	return result['average'];
-	reviews.innerHTML = `<h1>${result['average']}</h1>`;
+const reviews = document.getElementById("reviewList");
+async function get_averages(){
+	let response = await fetch(`/averages`);
+	let results = await response.json();
+	return results;
+}
+
+const formTitle = document.getElementById("formTitle");
+function change_title(title, isbn){
+	reviews.innerHTML = `<span>${title} - ${isbn}</span>`;
 }
 	
 const books = document.getElementById("books");
 async function load_books(){
+	let averages = await get_averages();
+	let html = "";
+	let count = 0;
 	let response = await fetch('/books');
 	let results = await response.json();
-	let html = "";
 	for (let book of results){
 		html += `
 		<div class="book card" style="color: black;">
@@ -21,7 +28,7 @@ async function load_books(){
 			<div>
 		`;
 		for (let i = 0; i < 5; i++){
-			if (i < get_average(book.isbn)){
+			if (i < averages[count]){
 				html += `
 					<span class="material-icons checked">star_rate</span>
 				`;
@@ -34,24 +41,21 @@ async function load_books(){
 		}
 		html += `
 			</div>
-			<button onclick="load_reviews(${book.isbn}); change_title(${book.title}, ${book.isbn});">Review</button>
+			<button type="button" onclick="change_title(${book.title}, ${book.isbn});">Review</button>
 		</div>
 		`;
+		count += 1;
 	}
 	books.innerHTML = html;
 }
 
 document.addEventListener("DOMContentLoaded", ()=>{
-	
 	load_books();
 });
 
-// const form-title = document.getElementById("form-title");
-// function change_title(title, isbn){
-// 	form-title.innerHTML = `${title} - ${isbn}`;
-// }
 
-// const reviews = document.getElementById("reviewList");
+
+
 // async function load_reviews(isbn){
 // 	let response = await fetch(`/reviews/${isbn}`);
 // 	let results = await response.json();
