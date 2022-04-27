@@ -43,7 +43,7 @@ def get_averages():
 def get_avg_book(isbn):
 	book = Book.query.filter_by(isbn=isbn).first()
 	average = book.get_avg_rating()
-	return average
+	return {'average': average}
 
 @app.route('/reviews/<isbn>', methods=['GET'])
 def get_reviews(isbn):
@@ -75,7 +75,8 @@ def get_book_id(isbn):
 		if book.isbn == isbn:
 			id = count
 		count += 1
-	return id
+	print(id)
+	return {'id': id}
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=8080, debug=True)

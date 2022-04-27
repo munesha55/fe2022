@@ -94,31 +94,44 @@ async function load_reviews(isbn){
 	reviews.innerHTML = html;
 }
 
-// async update_ratings(isbn, rating){
-// 	let response = await fetch(`/getbook/${isbn}`);
-// 	let result = await response.json();
-// 	let stars = document.getElementById(result).getElementsByClassName("rating");
-// 	stars[0].innerHTML = `${result}`;
-// }
+async function update_ratings(isbn, average){
+	let response = await fetch(`/getbook/${isbn}`);
+	let result = await response.json();
+	let stars = document.getElementById(result.id).getElementsByClassName("rating");
+	let html = "";
+	for (let i = 0; i < 5; i++){
+		if (i < average){
+			html += `
+				<span class="material-icons checked">star_rate</span>
+			`;
+		}
+		else {
+			html += `
+				<span class="material-icons">star_rate</span>
+			`;
+		}
+	}
+	stars[0].innerHTML = html;
+}
 
 async function get_average(isbn){
 	let response = await fetch(`/average/${isbn}`);
 	let result = await response.json();
-	update_ratings(isbn, result);
+	update_ratings(isbn, result.average);
 }
 
 async function add_review(isbn, formData){
 	let response = await fetch(`/createReview/${isbn}/${formData.text.value}/${formData.rating.value}`);
 	let results = await response.json();
 	await load_reviews(holder.innerHTML);
-	// get_average(holder.innerHTML);
+	await get_average(holder.innerHTML);
 }
 
 async function delete_review(id){
 	let response = await fetch(`/deleteReview/${id}`);
 	let result = await response.json();
 	await load_reviews(holder.innerHTML);
-	// get_average(holder.innerHTML);
+	await get_average(holder.innerHTML);
 }
 
 function deleteReview(id){
