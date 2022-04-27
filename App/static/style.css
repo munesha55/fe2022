@@ -45,6 +45,10 @@ body{
 	margin-left: auto;
 }
 
+#holder{
+	display: none;
+}
+
 #reviewList{
 	height: 53vh;
 	overflow-y: auto;
